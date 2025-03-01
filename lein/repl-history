@@ -1,0 +1,39 @@
+(+ 2 3 4)
+exit
+2 + 3
+(2 + 3)
+(+ 2 3)
+exit
+(+ 1 2 3)
+(if true
+(do (println "Success!")
+"By Zeus's hammer!")
+(do (println "Failure!")
+"By Aquaman's trident!"))
+(nil? 1)
+(nil? nil)
+(= 1 2)
+(false)
+(or false nil)
+(or false nil :large :small)
+(or false nil false :small)
+exit
+(doc assoc)
+(assoc :uuid 0)
+(doc swap!)
+(def account (atom {}))
+account
+@account
+(swap! account assoc :uuid 100)
+account
+@account
+exit
+(* 1901.12 1.1928i (+ (* 0.761 0.9521) 0.239))
+(* 1901.12 1.1928 (+ (* 0.761 0.9521) 0.239))
+(* 2031.64 1.1280 (+ (* 0.761 0.9514) 0.239))
+(val {:a 1})
+(map (fn [x] (inc (val x))) {:a 1 :b 2 :c 3})
+(first {:one 1))
+(first {:one 1})
+(val [:one 1])
+exit

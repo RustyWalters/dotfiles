@@ -1,0 +1,81 @@
+fpath+=("$(brew --prefix)/share/zsh/site-functions")
+
+# change the path color
+zstyle :prompt:pure:path color '069'
+
+autoload -U promptinit; promptinit
+prompt pure
+
+# Path to your oh-my-zsh installation.
+# export ZSH="/Users/walter/.oh-my-zsh"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# ZSH_THEME="avit"
+
+# oh-my-zsh plugins
+# plugins=(git)
+
+# source $ZSH/oh-my-zsh.sh
+
+ export MAVEN_HOME=/opt/homebrew/bin
+ export PATH="$MAVEN_HOME/bin:$PATH"
+#  export CATALINA_HOME=/Users/walter/dev/software/apache-tomcat-7.0.88
+ 
+# export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+
+if command -v pyenv 1>/dev/null 2>&1; then
+     eval "$(pyenv init -)"
+fi
+export PATH="/usr/local/opt/tcl-tk/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/tcl-tk/lib"
+export CPPFLAGS="-I/usr/local/opt/tcl-tk/include"
+export PKG_CONFIG_PATH="/usr/local/opt/tcl-tk/lib/pkgconfig"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPS="--extended"
+# export FZF_DEFAULT_COMMAND="fd --type f"
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+ctags=/usr/local/Cellar/ctags/5.8_1/bin/ctags
+
+#alias sopdev='export KUBECONFIG=~/.kube/kubeconfig-sop-dev'
+#alias pra='export KUBECONFIG=~/.kube/kubeconfig-sop-pra'
+export KUBECONFIG=~/Downloads/aks-kube-config
+
+# Execute >> /usr/libexec/java_home -V to see the installed JDK versions #pm-setup
+# export JAVA_8_HOME=$(/usr/libexec/java_home -v1.8.0) #pm-setup
+# export JAVA_11_HOME=$(/usr/libexec/java_home -v11.0.4) #pm-setup
+
+export JAVA_TOOL_OPTIONS="-Duser.timezone=Etc/UTC" #pm-setup
+# export TOMCAT_HOME="/usr/local/opt/apache-tomcat/apache-tomcat-7.0.88" #pm-setup export JDBC_ENV="-master" #pm-setup export JDBC_HOST="localhost" #pm-setup
+# export JDBC_USERNAME="root" #pm-setup
+# export JDBC_PASSWORD="password" #pm-setup
+# export INTELLIJ_DATA="/Users/walter/Library/Preferences/IntelliJIdea2017.2" #pm-setup
+# export MYSQL_HOME="/usr/local/opt/mysql@8.0" #pm-setup
+# export PATH="$MYSQL_HOME/bin:$PATH" #pm-setup
+export NODE_OPTIONS=--max_old_space_size=14000
+
+export PATH="$HOME/dev/software/flyway-9.11.0:$PATH" 
+export PATH="/usr/local/bin:/usr/bin:$PATH" 
+export PATH="$HOME/.local/bin:$PATH" 
+#export PATH="$HOME/local/nvim/bin:$PATH"
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+jdk() {
+  version=$1 
+  unset JAVA_HOME;
+  export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
+  java -version
+}
+
+alias lg='lazygit'
+
+eval $(ssh-agent)
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR=$(brew --prefix sdkman-cli)/libexec
+[[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+export PATH="/opt/homebrew/bin:$PATH"

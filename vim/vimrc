@@ -1,0 +1,259 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" relies on local install of fzf
+" use brew install fzf
+
+" relies on local install of Rg (ripgrep)
+" use brew install ripgrep
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=/usr/local/opt/fzf
+'
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+Plugin 'junegunn/gv.vim'
+Plugin 'tommcdo/vim-fubitive'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-commentary'
+Plugin 'scrooloose/nerdtree'
+" Plugin 'ctrlpvim/ctrlp.vim'
+" Plugin 'artur-shaik/vim-javacomplete2'
+" Plugin 'Valloric/YouCompleteMe'
+Plugin 'elmcast/elm-vim'
+Plugin 'tpope/vim-cucumber'
+Plugin 'aserebryakov/vim-todo-lists' 
+Plugin 'skywind3000/asyncrun.vim'
+Plugin 'posva/vim-vue'
+Plugin 'christoomey/vim-tmux-runner'
+Plugin 'mfukar/robotframework-vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'junegunn/fzf.vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'craigemery/vim-autotag'
+Plugin 'elixir-editors/vim-elixir'
+Plugin 'mattn/emmet-vim'
+Plugin 'prettier/vim-prettier'
+Plugin 'NLKNguyen/papercolor-theme'
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+Plugin 'vim-syntastic/syntastic'
+" vim-fireplace keybindings
+" cqc - quasi repl blank line
+" cqq - quasi repl fill the form
+" cpp - push the current form to the repl
+" cpr - reload entire namespace/buffer 
+Plugin 'dense-analysis/ale'
+Plugin 'tpope/vim-fireplace'
+Plugin 'bhurlow/vim-parinfer'
+Plugin 'clojure-vim/async-clj-omni'
+Plugin 'luochen1990/rainbow'
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+let g:coc_global_extensions = ['coc-css', 'coc-json', 'coc-python', 'coc-tsserver', 'coc-yank', 'coc-emmet', 'coc-ultisnips', 'coc-tailwindcss', 'coc-conjure']
+
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+" Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+" Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+" Use the space key as our leader. Put this near the top of your vimrc
+let mapleader = "\<Space>"
+
+" Split edit your vimrc. Type space, v, r in sequence to trigger
+nmap <leader>vr :sp $MYVIMRC<cr>
+
+" Source (reload) your vimrc. Type space, s, o in sequence to trigger
+nmap <leader>so :source $MYVIMRC<cr>
+
+set spell spelllang=en_us
+"Fix spelling with <leader>f
+nnoremap <leader>f 1z=
+
+set number
+
+syntax on " Syntax highlighting
+set showmatch " Shows matching brackets
+set ruler " Always shows location in file (line#)
+set smarttab " Autotabs for certain code
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+"-- FOLDING --
+set foldmethod=syntax "syntax highlighting items specify folds
+set foldcolumn=1 "defines 1 col at window left, to indicate folding
+let javaScript_fold=1 "activate folding by JS syntax
+set foldlevelstart=99 "start file with all folds opened
+
+"Toggle spelling visual with <leader>s
+nnoremap <leader>s :set spell!
+
+" set color scheme to PaperColor and dark background
+" set t_Co=256
+" set background=dark
+" colorscheme PaperColor
+
+let g:ctrlp_max_files=0
+
+set wildignore+=*/target/*
+set wildignore+=*/lib/*
+set wildignore+=*/node/*
+set wildignore+=*/node_modules/*
+set wildignore+=*/bin/*
+
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+" speed up ctrlp by persisting the cache and use ag (the silver search) to
+" search for files
+" let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+" if executable('ag')
+"       let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" endif
+
+" map F7 to compile java file with javac
+:noremap <F7> :AsyncRun javac "%" <cr> 
+
+" setting to have Quickfix window to show
+let g:asyncrun_open = 8
+
+filetype on
+
+" if executable('ag')
+"       let g:ackprg = 'ag --vimgrep'
+" endif
+
+" set gitgutter update time to be much quicker
+set updatetime=100
+
+" set relative line numbering on
+set relativenumber
+
+" map ctrl + p to use fzf
+nnoremap <C-p> :FZF<Cr>
+
+" map ctrl + n to open NERDTree
+nnoremap <C-n> :NERDTreeToggle<Cr>
+
+" Set internal encoding of vim, not needed on neovim, since coc.nvim using
+" some
+" unicode characters in the file autoload/float.vim
+set encoding=utf-8
+
+" TextEdit might fail if hidden is not set.
+set hidden
+
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+      " Recently vim can merge signcolumn and number column into one
+        set signcolumn=number
+else
+        set signcolumn=yes
+endif
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped
+" by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+       \ pumvisible() ? "\<C-n>" :
+       \ <SID>check_back_space() ? "\<TAB>" :
+       \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+     let col = col('.') - 1
+     return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+   inoremap <silent><expr> <c-space> coc#refresh()
+else
+   inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-e>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" syntastic settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exe = 'npm run lint --'
+
+" Set ale linters
+let g:ale_linters = {'clojure': ['clj-kondo']}
+
+set completeopt-=preview
+let g:float_preview#docked = 0
+let g:float_preview#max_width = 80
+let g:float_preview#max_height = 40
+
+" configure fubitive.vim to support custom domains for GBrowse
+let g:fubitive_domain_pattern = 'git.pointclickcare.com'
+
+" With python 3.8 the default method for multiprocessing is spawn, which has
+" an issue.  Configure autotag to use fork instead.
+let g:autotagStartMethod='fork'
+
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle

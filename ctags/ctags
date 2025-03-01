@@ -1,0 +1,11 @@
+--recurse=yes
+--exclude=.git
+--exclude=vendor/*
+--exclude=node_modules/*
+--exclude=db/*
+--exclude=log/*
+--exclude=tags
+--exclude=target
+--exclude=node_modules
+--exclude=\*.swp
+--exclude=\*.class
